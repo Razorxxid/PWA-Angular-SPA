@@ -1,0 +1,23 @@
+<div class="h-screen w-screen bg-green-600">
+    <div class="flex flex-col h-5/6 w-auto justify-center items-center space-y-6 z-20">
+        <a  (click)="navigateToBandeja()" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
+            <svg class="flex fill-white mx-4 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M725.769-457.308v-45.384h137.307v45.384H725.769Zm47.307 276.537-110.614-82.307L690-299.154l110.614 82.307-27.538 36.076ZM690.692-663l-27.538-36.076 108.384-81.692 27.538 36.076L690.692-663ZM217.308-220.771v-156.153h-62.692q-23.596 0-40.644-17.048t-17.048-40.644v-90.768q0-23.596 17.048-40.644t40.644-17.048h169.23l179.23-106.922v419.996l-179.23-106.922h-61.154v156.153h-45.384Zm240.384-129.46v-259.538L336-537.692H154.616q-4.615 0-8.462 3.846-3.846 3.847-3.846 8.462v90.768q0 4.615 3.846 8.462 3.847 3.846 8.462 3.846H336l121.692 72.077Zm100.769-5v-249.538q23.539 21.308 37.923 53.692 14.385 32.385 14.385 71.077t-14.385 71.077Q582-376.539 558.461-355.231ZM300-480Z"/></svg>
+            <p class="mx-8">
+                Bandeja de Entrada
+            </p>
+            <router-outlet name="view"></router-outlet>
+        </a>
+
+        <a (click)="navigateToManager()" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
+            <svg class="flex fill-white mx-2 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40"><path d="M479.788-82.667q-28.138 0-47.963-19.975T412-150.667h136q0 28.667-20.037 48.333-20.038 19.667-48.175 19.667Zm-289.121-108V-232h60v-334q0-82.333 52.167-146.333 52.166-64 133.833-80v-13.334q0-17.333 12.627-30.333 12.628-13 30.667-13t30.706 13q12.666 13 12.666 30.333v13.123q17.073 2.963 31.87 8.921Q570-777.666 585-770.666l-185 184V-360h217.333l93-93v221h60v41.333H190.667ZM496-456v-90l213.667-212.666q6.277-5.412 12.728-8.04 6.451-2.627 12.901-2.627 7.037 0 13.913 2.167 6.877 2.166 12.457 7.5l37 39q5.667 6.333 8.167 12.5 2.5 6.166 2.5 13.333 0 7.166-2.461 13.604-2.461 6.437-8.206 12.562L586-456h-90Zm245.666-206.666L773-695l-37-38-32.334 32.334 38 38Z"/></svg>
+            <p class="mx-4">
+                Gestor de Avisos
+            </p>
+        </a>
+    </div>
+
+  
+</div>
+
+
+

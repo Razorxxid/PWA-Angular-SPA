@@ -1,0 +1,35 @@
+
+            <!-- Formulario -->
+            <form class="flex flex-col space-y-6 items-center justify-center w-80">
+              
+                <label for="correo" class="text-white">Correo electrónico:</label>
+                <div class="flex items-center ">
+                   
+                    <input type="email" size ="20" id="correo" name="correo" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black  " required>
+                </div>
+              
+                <label for="confirmarCorreo" class="text-white">Confirma correo electrónico:</label>
+                <div class="flex items-center ">
+                    
+                    <input type="email" size ="20" id="confirmarCorreo" name="confirmarCorreo" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black  " required>
+                </div>
+
+                <label for="contrasena" class="text-white">Contraseña:</label>
+
+                <div class="flex items-center ">
+                    <input type="password"  size="16" id="contrasena" name="contrasena" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black  " required>
+                </div>
+
+                <label for="repetirContrasena" class="text-white">Repite la contraseña:</label>
+                <div class="flex items-center ">
+                    
+                    <input type="password" size="16" id="repetirContrasena" name="repetirContrasena" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black  " required>
+                </div>
+
+            
+                <!-- Botón de envío -->
+                <button routerLink="/auth" type="submit" class="flex  text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16  border border-green-700 text-white rounded-lg dark:text-white   no-underline">
+                    Siguiente
+                </button>
+            </form>
+

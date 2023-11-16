@@ -1,0 +1,9 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Forte MT Std Regular';
+    src: url('/assets/fonts/Forte MT Std Regular.otf') format('opentype');
+  }

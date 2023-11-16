@@ -1,0 +1,32 @@
+
+            <!-- Formulario -->
+            <form class="flex flex-col space-y-4 items-start justify-center w-80">
+
+                <label for="fechaNacimiento" class="text-white">Nro de Afiliado:</label>
+                <div class="flex items-center ">
+                    
+                    <input  type="text" id="fechaNacimiento" name="fechaNacimiento" size="6" class="shadow-xl text-lg font-semibold w-28  h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black " required>
+                </div>
+
+
+                <label for="nombre" class="text-white">Nombre/s:</label>
+
+                <div class="flex items-center ">
+                    <input type="text" id="nombre" name="nombre" class="shadow-xl text-lg font-semibold w-64  h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black " required>
+                </div>
+
+                <label for="apellidos" class="text-white">Apellido/s:</label>
+                <div class="flex items-center ">
+                   
+                    <input type="text" id="apellidos" name="apellidos" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black " required>
+                </div>
+
+            
+
+              
+                <!-- Botón de envío -->
+                <button routerLink="/register/step2" type="submit" class="flex text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16  border border-green-700 text-white rounded-lg dark:text-white  no-underline">
+                    Siguiente
+                </button>
+            </form>
+

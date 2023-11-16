@@ -1,0 +1,23 @@
+
+            <!-- Formulario -->
+            <form class="flex flex-col space-y-6 items-center justify-center w-80">
+
+                <label for="birthdate" class="text-white">Fecha de Nacimiento</label>
+                <div class="flex items-center  justify-center">
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" >
+                    <button type="submit" class="text-white">Guardar</button>
+                </div>
+                
+                <label for="familysize" class="text-white">Cantidad de personas del grupo familiar:</label>
+                <div class="flex items-center ">
+                    
+                    <input type="number" size ="20" id="familysize" name="familysize" class="shadow-xl text-lg font-semibold w-64 h-16 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black  " required>
+                </div>
+
+       
+                <!-- Botón de envío -->
+                <button routerLink="/register/step3" type="submit" class="flex  text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16  border border-green-700 text-white rounded-lg dark:text-white   no-underline">
+                    Siguiente
+                </button>
+            </form>
+
