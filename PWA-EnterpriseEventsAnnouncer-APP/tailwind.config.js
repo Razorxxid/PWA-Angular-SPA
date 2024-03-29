@@ -5,6 +5,8 @@ module.exports = {
   content: [ "./src/app/app.component.{html,ts}",
   "./src/index.{html,ts}",
   "./src/app/main/main-menu/main-menu.component.{html,ts}",
+  "./src/app/main/page-not-found/page-not-found.component.{html,ts}",
+  "./src/app/main/layout/layout.component.{html,ts}",
   "./src/app/main/announcements.component.{html,ts}",
   "./src/app/main/announcements/management.component.{html,ts}",
   "./src/app/main/announcements/management/new-annoucement/new-annoucement/step3/step3.component.{html,ts}",

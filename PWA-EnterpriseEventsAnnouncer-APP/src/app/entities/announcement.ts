@@ -1,17 +1,14 @@
 export class Announcement {
 
-        id: number;
+        id?: string;
         title: string;
-        image_src: string;
-        text: string;
-        category: string;
-
-        constructor(id: number, title: string, image_src: string, text: string, category: string) {
+        image_url?: string ;
+        text: string  ;
+        constructor(id: string, title: string, image_src: string, text: string) {
             this.id = id;
             this.title = title;
-            this.image_src = image_src;
+            this.image_url = image_src;
             this.text = text;
-            this.category = category;
         }
     
     

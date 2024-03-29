@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-annoucement-history',
-  templateUrl: './annoucement-history.component.html',
-  styleUrls: ['./annoucement-history.component.css']
+    selector: 'app-annoucement-history',
+    templateUrl: './annoucement-history.component.html',
+    styleUrls: ['./annoucement-history.component.css'],
+    standalone: true
 })
 export class AnnoucementHistoryComponent {
 

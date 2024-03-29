@@ -1,38 +1,52 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Announcement } from 'src/app/entities/announcement';
+import { ViewItemComponent } from './view-item/view-item.component';
+import { AnnouncementEntity } from 'src/app/viewmodels/annoucement-entity';
+import { SignalRService } from 'src/app/services/security/signalr.service';
+import { CommonModule } from '@angular/common';
+import { AnnouncementDto } from 'src/app/viewmodels/annoucementDto';
+import { LayoutComponent } from '../../layout/layout.component';
 
 @Component({
-  selector: 'app-inbox',
-  templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.css']
+    selector: 'app-inbox',
+    templateUrl: './inbox.component.html',
+    styleUrls: ['./inbox.component.css'],
+    standalone: true,
+    imports: [ViewItemComponent, InboxComponent, CommonModule]
 })
-export class InboxComponent {
+export class InboxComponent implements OnInit {
+  announcementToSend: Announcement = new Announcement("0", '', '', '');
+  entityEmittedFlag: boolean = false;
+  announcementList$: BehaviorSubject<Announcement[]> = new BehaviorSubject<Announcement[]>([]);
 
-  announcementToSend: Announcement = new Announcement(0,'','','','');
+  constructor(private router: Router, private signalRService: SignalRService) { }
 
-  entityEmittedFlag : boolean = false;
+  ngOnInit(): void {
+    this.signalRService.addReceiveMessageListener();
 
-  onAnnouncementClick (param: Announcement) {
-    this.announcementToSend=param;
+    this.signalRService.receivedMessages$.subscribe((receivedMessages: AnnouncementDto[]) => {
+      // Crear una nueva lista de anuncios
+      var newAnnouncementList: Announcement[] = [];
+
+      // Iterar sobre los nuevos mensajes recibidos y agregarlos a la lista
+      receivedMessages.forEach((announcement: AnnouncementDto) => {
+
+        newAnnouncementList.push(new Announcement(announcement.id,
+           announcement.title,announcement.imageUrl, announcement.text));
+
+        console.log('Announcement :' + announcement); // Imprimir mensaje en la consola
+
+      });
+
+      // Actualizar el BehaviorSubject con la nueva lista de anuncios
+      this.announcementList$.next(newAnnouncementList);
+    });
+  }
+
+  onAnnouncementClick(param: Announcement) {
+    this.announcementToSend = param;
     this.entityEmittedFlag = true;
   }
-
-  announcementList: Announcement[] = []; // Lista de anuncios
-
-  constructor(private router: Router) { 
-    
-  }
-  
-  
-
- 
-  ngOnInit(): void {
-    this.announcementList = [
-      new Announcement(1,'Atencion!!! Plan 100% Medicamentos', "/assets/aviso-medicamentos.jpg", "Clic aqui para comunicarse por whatsaspp: ", "General"),
-      new Announcement(2,'Magui Olave en la Sala del Rey 25/8!', '/assets/aviso-maguiolave.jpg', "anticipadas", "Grupo"),
-      new Announcement(3,'Torneo de Futbol y Ajedrez Temporada 2023', '/assets/aviso-torneostemporada2023.jpg', "Notifica tu participacion a los delegados!", "General"),
-    ];
-  }
- 
 }

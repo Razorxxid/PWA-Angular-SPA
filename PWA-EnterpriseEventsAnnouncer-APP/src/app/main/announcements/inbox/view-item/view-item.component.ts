@@ -3,13 +3,14 @@ import { Announcement } from 'src/app/entities/announcement';
 
 
 @Component({
-  selector: 'app-view-item',
-  templateUrl: './view-item.component.html',
-  styleUrls: ['./view-item.component.css']
+    selector: 'app-view-item',
+    templateUrl: './view-item.component.html',
+    styleUrls: ['./view-item.component.css'],
+    standalone: true
 })
 export class ViewItemComponent {
 
-  @Input() receivedAnnouncement: Announcement = new Announcement(0,'','','','');
+  @Input() receivedAnnouncement?: Announcement;
 
   
 

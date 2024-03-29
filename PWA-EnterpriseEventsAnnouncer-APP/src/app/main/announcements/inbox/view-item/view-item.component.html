@@ -1,18 +1,23 @@
-<div class="flex flex-col h-screen w-auto-80 z-20 items-center justify-center  bg-green-700">
+<meta charset="utf-8">
+<div class="flex flex-col h-full w-full z-20 xl:w-80 bg-green-700">
+    @if (receivedAnnouncement != null) {
+        <div class = "flex h-1/8 w-full xl:w-5/6 bg-green-700 text-center border border-solid  justify-center items-center text-white text-xl font-semibold ">
+            {{ receivedAnnouncement.title}}
+        </div>
+      
+        <div class=" h-4/8 w-auto xl:w-80 object-cover flex bg-green-700">
+            <img class="flex object-scale-down  h-auto w-auto justify-center bg-green-700 " src="{{ receivedAnnouncement.image_url }}"  >
+    
+        </div>
+    
+        <div>
+            <p class = "flex h-3/8 w-full bg-green-700 text-center border border-solid items-center  justify-center text-white  font-semibold ">
+                {{ receivedAnnouncement.text}}
+            </p>
+        </div>
 
-    <div class = "flex h-16 w-full xl:w-5/6 bg-green-700 text-center border border-solid  justify-center items-center text-white text-xl font-semibold ">
-        {{ receivedAnnouncement.title}}
-    </div>
-  
-    <div class=" h-full w-full xl:w-80 object-cover inline-flex bg-green-700">
-        <img class="object-scale-down h-48 w-full bg-green-700 " src="{{ receivedAnnouncement.image_src }}"  >
-
-    </div>
-
-  
-    <p class = "flex h-24 w-full bg-green-700 text-center border border-solid items-center  justify-center text-white  font-semibold ">
-        {{ receivedAnnouncement.text}}
-    </p>
+    }
+    
 
 </div>
 

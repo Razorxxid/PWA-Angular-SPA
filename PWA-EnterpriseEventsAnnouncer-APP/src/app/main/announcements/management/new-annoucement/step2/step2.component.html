@@ -4,25 +4,13 @@
     <!-- Formulario -->
     <form class="flex flex-col  items-center justify-center w-full">
 
-        <h3 class="text-white text-2xl mb-8 font-semibold">Primer paso para el aviso</h3>
+        <h3 class="text-white text-2xl mb-8 font-semibold">Segundo paso para el aviso</h3>
 
-      
-        <label for="nombre"  class="text-white">Imagen:</label>
-
-        <div class="flex flex-row">
-            <button   class="flex text-center my-4  justify-center items-center shadow-xl text-base font-semibold w-34 h-14  border border-green-700 text-white rounded-lg dark:text-white  no-underline">
-                Destinatarios Predefinidos
-            </button>
-            
-            <p class="flex my-8 mx-2 juestify-center text-white">O</p>
-            
-            <button   class="flex text-center my-4  justify-center items-center shadow-xl text-base font-semibold w-34 h-14  border border-green-700 text-white rounded-lg dark:text-white  no-underline">
-                Adjuntar Imagen
-            </button>
-        </div>
+              <h3 class="text-white text-2xl mb-8 font-semibold">Vista Previa del anuncio</h3>
         
-        <!-- Botón de envío -->
-        <button   type="submit" class="flex mt-4 text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16   border border-green-700 text-white rounded-lg dark:text-white  no-underline">
+              <app-view-item   [receivedAnnouncement]="receivedAnnouncement"></app-view-item>
+              <!-- Botón de envío -->
+        <button (click)="emitOutput()"   type="submit" class="flex mt-4 text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16   border border-green-700 text-white rounded-lg dark:text-white  no-underline">
             Siguiente Paso
         </button>
     </form>

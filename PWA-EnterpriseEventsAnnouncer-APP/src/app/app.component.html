@@ -1,4 +1,20 @@
-<div>
-    <router-outlet></router-outlet> <!-- Este es el router-outlet que mostrará los componentes según la ruta -->
+<div class="flex-col h-screen w-screen items-start justify-center   bg-green-600 ">
+    @if(isMainMenuRoute())
+    {             
+    
+            <router-outlet>
+                <app-layout class="flex ">
+                </app-layout>  
+        
+            </router-outlet>
+    
+     
+      
+         
+    } @else  {
+   
+        <router-outlet></router-outlet>
+
+    }
 
 </div>

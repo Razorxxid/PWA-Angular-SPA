@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Step3Component } from './step3/step3.component';
+import { Step2Component } from './step2/step2.component';
+import { Step1Component } from './step1/step1.component';
+import { NgIf } from '@angular/common';
+import { SendAnnouncementDto } from 'src/app/viewmodels/sendAnnoucementDto';
 
 enum creationStep {
   step1 = 1,
@@ -8,34 +13,32 @@ enum creationStep {
 }
 
 @Component({
-  selector: 'app-new-announcement',
-  templateUrl: './new-announcement.component.html',
-  styleUrls: ['./new-announcement.component.css']
+    selector: 'app-new-announcement',
+    templateUrl: './new-announcement.component.html',
+    styleUrls: ['./new-announcement.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, NgIf, Step1Component, Step2Component, Step3Component]
 })
 
 export class NewAnnouncementComponent {  
 
-  productForm = new FormGroup({
-    name: new FormControl('', {
-    nonNullable: true
-    }),
-    price: new FormControl<number | undefined>(undefined, {
-    nonNullable: true
-    }),
-    info: new FormGroup({
-    category: new FormControl(''),
-    description: new FormControl(''),
-    image: new FormControl('')
-    })
-   })
 
 
-
-
-
+  receiveForm: SendAnnouncementDto = new SendAnnouncementDto('', '', '', []);
  
+  step2Confirmation: boolean = false;
 
   step: creationStep;
+
+
+  receiveFormFromStep1($event: SendAnnouncementDto) {
+
+    this.receiveForm.title = $event.title;
+    this.receiveForm.text = $event.text;
+    this.receiveForm.imageUrl = $event.imageUrl;
+    this.receiveForm.destinationGroupsIds = $event.destinationGroupsIds;
+    this.nextStep();
+  }
 
   isStep1() {
     return this.step === creationStep.step1;
@@ -57,6 +60,13 @@ export class NewAnnouncementComponent {
   }
 
   submitForm() {
+
+  }
+
+  completeStep2($event: boolean) 
+  {
+    this.step2Confirmation = $event;
+    this.nextStep();
 
   }
 

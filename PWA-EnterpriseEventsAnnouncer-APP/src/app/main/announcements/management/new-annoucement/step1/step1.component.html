@@ -2,39 +2,31 @@
 
 
     <!-- Formulario -->
-    <form class="flex flex-col  items-center justify-center w-full">
+    <form class="flex flex-col  items-center justify-center w-full" [formGroup]="formgroupStep1">
 
         <h3 class="text-white text-2xl mb-8 font-semibold">Primer paso para el aviso</h3>
 
         <label for="nombre" class="text-white">Titulo:</label>
 
         <div class="flex items-center ">
-            <input  placeholder="Aqui va el Titulo" type="text" id="title" name="title" maxlength="36" size="36" class="shadow-xl text-lg font-semibold w-80 h-12 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black" required>
+            <input  placeholder="Aqui va el Titulo" type="text" id="title" formControlName="title" name="title" maxlength="36" size="36" class="shadow-xl text-lg font-semibold w-80 h-12 flex text-center items-center border border-green-700 text-black rounded-lg dark:text-black" required>
         </div>
 
-        <label for="nombre"  class="text-white">Imagen:</label>
+        <label for="nombre"  class="text-white">Link/URL Imagen:</label>
 
-        <div class="flex flex-row">
-            <button   class="flex text-center my-4  justify-center items-center shadow-xl text-base font-semibold w-34 h-14  border border-green-700 text-white rounded-lg dark:text-white  no-underline">
-                Imagen Por Defecto
-            </button>
-            
-            <p class="flex my-8 mx-2 juestify-center text-white">O</p>
-            
-            <button   class="flex text-center my-4  justify-center items-center shadow-xl text-base font-semibold w-34 h-14  border border-green-700 text-white rounded-lg dark:text-white  no-underline">
-                Adjuntar Imagen
-            </button>
+        <div class="flex items-center ">
+            <textarea [value] = "formgroupStep1.get('imageUrl')" cols="40" rows="2" class="resize-none rounded-md" placeholder="    Pega aqui la URL de la imagen" id="imageUrl" formControlName="imageUrl"></textarea>
         </div>
         
     
         <label for="texto" class="text-white">Texto:</label>
 
         <div class="flex items-center ">
-            <textarea cols="40" rows="5" class="resize-none rounded-md" placeholder="    Escribe un mensaje aqui para el aviso"></textarea>
+            <textarea cols="40" rows="5" class="resize-none rounded-md" placeholder="    Escribe un mensaje aqui para el aviso" id="text" formControlName="text"></textarea>
         </div>
         
         <!-- Botón de envío -->
-        <button  (click)="nextStep.emit()" type="submit" class="flex mt-4 text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16   border border-green-700 text-white rounded-lg dark:text-white  no-underline">
+        <button  (click)="OnSubmit()" type="submit" class="flex mt-4 text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16   border border-green-700 text-white rounded-lg dark:text-white  no-underline">
             Siguiente Paso
         </button>
     </form>

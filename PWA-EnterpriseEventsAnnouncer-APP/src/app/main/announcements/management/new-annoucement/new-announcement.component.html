@@ -1,14 +1,12 @@
 <div class="flex flex-col h-screen w-screen  bg-green-600">
-    <form (ngSubmit)="submitForm()">
-        <ng-container *ngIf="step === 1">
-            <app-step1 (step)="nextStep()" ></app-step1>
-          </ng-container>
-      <ng-container *ngIf="step === 2">
-        <app-step2 (step)="nextStep()" ></app-step2>
-      </ng-container>
-      <ng-container *ngIf="step === 3">
-        <app-step3 (submitForm)="submitForm()" ></app-step3>
-      </ng-container>
-    </form>
-  </div>
+      @if(isStep1()){
+        <app-step1 (nextStep)="receiveFormFromStep1($event)"></app-step1>
+      }   
+      @if(isStep2()){
+        <app-step2 (nextStep)="completeStep2($event)"></app-step2>
+      }
+      @if(isStep3()){
+        <app-step3 ></app-step3>
+      }
+</div>
 
