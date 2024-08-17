@@ -5,13 +5,13 @@
     {
       "name": "api",
       "urls": [
-        "https://pwa-gremio-api.azure-api.net/pwa-gremio-api/GremioHubService/api/"
+        "https://pwa-gremio-api.azure-api.net/pwa-gremio-api/api/UserData/"
       ],
       "cacheConfig": {
         "maxSize": 20,
-        "maxAge": "3d",
+        "maxAge": "1d",
         "timeout": "30s",
-        "strategy": "performance"
+        "strategy": "freshness"
       }
     }
   ],
