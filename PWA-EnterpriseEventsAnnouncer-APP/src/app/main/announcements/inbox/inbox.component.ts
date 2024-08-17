@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, filter, take, takeUntil,Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Announcement } from 'src/app/entities/announcement';
 import { ViewItemComponent } from './view-item/view-item.component';
@@ -16,7 +16,7 @@ import { UserSignalRDataService } from 'src/app/services/UserSignalRDataService'
   standalone: true,
   imports: [ViewItemComponent, CommonModule]
 })
-export class InboxComponent implements OnInit {
+export class InboxComponent implements OnInit, OnDestroy {
   announcementToSend: Announcement = new Announcement(0, '', '', '');
   entityEmittedFlag: boolean = false;
   announcementList$: BehaviorSubject<Announcement[]> = new BehaviorSubject<Announcement[]>([]);
@@ -24,6 +24,8 @@ export class InboxComponent implements OnInit {
 
   private retryAttempts: number = 0;
   private maxRetryAttempts: number = 5;
+  private destroy$: Subject<void> = new Subject<void>();
+  private retryInProgress: boolean = false;
 
   constructor(
     private router: Router, 
@@ -32,80 +34,93 @@ export class InboxComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Suscripción a mensajes de SignalR
-    this.signalRService.receivedMessages$.subscribe((receivedMessages: AnnouncementDto[]) => {
-      this.updateAnnouncements(receivedMessages);
-    });
-  
-    // Suscripción a anuncios de la API
-    this.signalRDataS.annoucementsOfUser$.subscribe((receivedMessages: AnnouncementDto[]) => {
-      this.apilist$.next(receivedMessages.map((announcement: AnnouncementDto) => 
-        new Announcement(announcement.id, announcement.title, announcement.imageUrl, announcement.text)
-      ));
-      
-      // Combinar la lista obtenida de la API con la lista actual
-      const currentList = this.announcementList$.getValue();
-      const newApiList = receivedMessages.map((announcement: AnnouncementDto) =>
-        new Announcement(announcement.id, announcement.title, announcement.imageUrl, announcement.text)
-      );
-      
-      const combinedList = [
-        ...currentList,
-        ...newApiList.filter(newAnn => !currentList.some(currAnn => currAnn.id === newAnn.id))
-      ];
-  
-      this.announcementList$.next(combinedList);
-    });
-  
-    // Inicializa la lista de anuncios desde la API si está vacía
-    this.announcementList$.subscribe(announcements => {
-      if (announcements.length === 0 && this.retryAttempts < this.maxRetryAttempts) {
-        this.retryAttempts++;
-        this.recallAnnouncementsWithRetry();
-      } else {
-        this.retryAttempts = 0;
-      }
-    });
-  
-    // Llama a la API para obtener anuncios al inicializar el componente
-    this.signalRDataS.getAnnouncementsOfUser();  // Llamar a la API para obtener datos iniciales
+    this.signalRService.receivedMessages$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((receivedMessages: AnnouncementDto[]) => {
+        this.updateAnnouncements(receivedMessages);
+      });
+
+    this.signalRDataS.annoucementsOfUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((receivedMessages: AnnouncementDto[]) => {
+        this.handleAnnouncementsFromApi(receivedMessages);
+      });
+
+    this.loadInitialAnnouncements();
   }
-  
-  private updateAnnouncements(receivedMessages: AnnouncementDto[]): void {
-    // Mapea los datos recibidos a instancias de Announcement
-    const newAnnouncements: Announcement[] = receivedMessages.map((announcement: AnnouncementDto) => 
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private loadInitialAnnouncements(): void {
+    this.signalRDataS.getAnnouncementsOfUser();
+    
+    this.announcementList$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(announcements => announcements.length === 0),
+        take(1) // Solo queremos tomar la primera emisión si la lista está vacía
+      )
+      .subscribe(() => {
+        if (!this.retryInProgress && this.retryAttempts < this.maxRetryAttempts) {
+          this.retryInProgress = true;
+          this.recallAnnouncementsWithRetry();
+        }
+      });
+  }
+
+  private handleAnnouncementsFromApi(receivedMessages: AnnouncementDto[]): void {
+    this.apilist$.next(receivedMessages.map((announcement: AnnouncementDto) =>
+      new Announcement(announcement.id, announcement.title, announcement.imageUrl, announcement.text)
+    ));
+
+    const currentList = this.announcementList$.getValue();
+    const newApiList = receivedMessages.map((announcement: AnnouncementDto) =>
       new Announcement(announcement.id, announcement.title, announcement.imageUrl, announcement.text)
     );
-  
-    // Obtiene la lista actual de anuncios
+
+    const combinedList = [
+      ...currentList,
+      ...newApiList.filter(newAnn => !currentList.some(currAnn => currAnn.id === newAnn.id))
+    ];
+
+    this.announcementList$.next(combinedList);
+  }
+
+  private updateAnnouncements(receivedMessages: AnnouncementDto[]): void {
+    const newAnnouncements: Announcement[] = receivedMessages.map((announcement: AnnouncementDto) =>
+      new Announcement(announcement.id, announcement.title, announcement.imageUrl, announcement.text)
+    );
+
     const currentAnnouncements = this.announcementList$.getValue();
-  
-    // Fusiona la lista actual con los nuevos anuncios (evita duplicados)
     const combinedAnnouncements = [
       ...currentAnnouncements,
       ...newAnnouncements.filter(newAnn => !currentAnnouncements.some(currAnn => currAnn.id === newAnn.id))
     ];
-  
-    // Actualiza el BehaviorSubject con la lista combinada
+
     this.announcementList$.next(combinedAnnouncements);
   }
-  
-  
 
   private recallAnnouncementsWithRetry(): void {
     console.log(`Attempt ${this.retryAttempts}: Recalling announcements...`);
-    try {
-      this.signalRDataS.getAnnouncementsOfUser();
-    } catch (error) {
-      console.error('Error recalling announcements:', error);
+    this.signalRDataS.getAnnouncementsOfUser();
+
+    setTimeout(() => {
       if (this.retryAttempts < this.maxRetryAttempts) {
-        setTimeout(() => this.recallAnnouncementsWithRetry(), 5000);
+        this.retryAttempts++;
+        this.retryInProgress = false;
+        this.loadInitialAnnouncements();
+      } else {
+        this.retryInProgress = false;
       }
-    }
+    }, 5000);
   }
-  
+
   onAnnouncementClick(param: Announcement) {
     this.announcementToSend = param;
     this.entityEmittedFlag = true;
   }
 }
+
