@@ -28,7 +28,7 @@ export class UserDataService {
     constructor(private http: HttpClient) {
 
         
-      this.getUserData()
+
 
     }
 

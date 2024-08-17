@@ -1,20 +1,7 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
-  "dataGroups": [
-    {
-      "name": "api",
-      "urls": [
-        "https://pwa-gremio-api.azure-api.net/pwa-gremio-api/api/UserData/"
-      ],
-      "cacheConfig": {
-        "maxSize": 20,
-        "maxAge": "1d",
-        "timeout": "30s",
-        "strategy": "freshness"
-      }
-    }
-  ],
+  
   "assetGroups": [
     {
       "name": "app",
@@ -42,3 +29,5 @@
     }
   ]
 }
+
+
