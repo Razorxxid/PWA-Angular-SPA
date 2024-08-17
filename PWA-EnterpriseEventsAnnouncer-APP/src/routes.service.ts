@@ -13,11 +13,14 @@ import { MainMenuComponent } from './app/main/main-menu/main-menu.component';
 import { RegisterStep2Component } from './app/auth/register/register-step2/register-step2.component';
 import { RegisterStep3Component } from './app/auth/register/register-step3/register-step3.component';
 import { authenticatedGuard } from './app/services/security/authenticated-guard.service';
+import { PageNotFoundComponent } from './app/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
   { path: 'auth', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'register', redirectTo: 'register/step1', pathMatch: 'full' },
+  //{ path: '**', component: PageNotFoundComponent }, // Ruta para 404 Not Found
+
   {
     path: 'auth',
     component: AuthComponent,

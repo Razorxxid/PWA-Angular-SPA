@@ -5,7 +5,7 @@
     {
       "name": "api",
       "urls": [
-        "https://pwa-api-demo-dvb3hmd5frbqfkd0.brazilsouth-01.azurewebsites.net/api/"
+        "https://pwa-gremio-api.azure-api.net/pwa-gremio-api/GremioHubService/api/"
       ],
       "cacheConfig": {
         "maxSize": 20,
