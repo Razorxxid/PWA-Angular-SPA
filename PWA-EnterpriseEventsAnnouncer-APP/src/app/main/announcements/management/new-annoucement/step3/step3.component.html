@@ -1,1 +1,28 @@
-<p>step3 works!</p>
+
+
+    <!-- Formulario -->
+    <div class="flex flex-col h-max w-max items-center justify-center " >
+
+        <h3 class="flex-none h-1/6  text-white text-2xl mb-8 font-semibold">Tercer paso para el aviso</h3>
+
+        <h3 class="flex-none h-1/6  text-white text-2xl mb-8 font-semibold">Escoja a los sectores/grupos destinatarios</h3>
+
+        <ul class="flex h-3/6 w-screen items-center justify-center  overflow-y-auto space-y-2 border border-green-700 text-white rounded-lg dark:text-white  no-underline " >
+          @if(groupList$ | async ; as groupList){
+            <li class="flex-col w-max">
+
+              @for (group of groupList; track group) {
+                <input type="checkbox" name="sector" value="{{group}}"  (change)="onCheckboxChange(group, $event)"> {{group.name}}<br>
+              }
+            </li>
+       
+          }
+
+        </ul>
+        
+              <!-- Botón de envío -->
+        <button  (click) = "emitOutput()"class="flex   h-1/6 mt-4 text-center justify-center items-center shadow-xl text-lg font-semibold w-80 h-16   border border-green-700 text-white rounded-lg dark:text-white  no-underline">
+            Enviar Anuncio.
+        </button>
+      </div>
+

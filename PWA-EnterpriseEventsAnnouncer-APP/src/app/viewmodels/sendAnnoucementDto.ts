@@ -3,7 +3,7 @@ export class SendAnnouncementDto {
       public title: string,
       public text: string,
       public imageUrl: string,
-      public destinationGroupsIds: string[],
+      public destinationGroupsIds: number[],
 
     ) {}
   }

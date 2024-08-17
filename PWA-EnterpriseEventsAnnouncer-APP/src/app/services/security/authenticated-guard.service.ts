@@ -1,23 +1,21 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthenticatedGuardService  {
+export const authenticatedGuard: CanActivateFn = (route, state) => {
+  const storageService = inject(StorageService);
+  const router = inject(Router);
 
-  constructor(private storageService: StorageService, private router: Router) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.storageService.isLoggedIn()) {
-      return true;  // Usuario autenticado, permitir el acceso a la ruta
-    } else {
-      this.router.navigate(['auth']);
-      return false; // Usuario no autenticado, redirigir a la página de inicio de sesión
+  if (storageService.isLoggedIn()) {
+    return true;
+  } else {
+    if (state.url !== '/auth/login') {  // Verificar que no esté intentando recargar la misma página
+      router.navigateByUrl('/auth/login').then(() => {
+        window.location.reload();  // Recargar solo si es una nueva navegación
+      });
     }
+    console.log('Usuario no autenticado, redirigiendo a la página de inicio de sesión');
+    return false;
   }
-
-}
-
-
+};

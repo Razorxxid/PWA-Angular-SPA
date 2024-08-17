@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:5078/api/Authetication';
-const API_URL = 'http://localhost:5078/api/';
+const AUTH_API = 'https://pwa-gremio-api.azure-api.net/pwa-gremio-api/api/Authetication';
+const API_URL = 'https://pwa-gremio-api.azure-api.net/pwa-gremio-api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 

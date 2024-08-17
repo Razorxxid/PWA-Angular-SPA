@@ -3,7 +3,7 @@
         <div class="flex flex-col h-5/6  w-auto justify-center items-center space-y-6  z-20 ">
 
             <a class = "text-center text-3xl font-semibold mt-14  text-white mb-4">
-                ¡Bienvenido Fernando!
+                ¡Bienvenido {{userName}}!
 
             </a>
 
@@ -50,7 +50,7 @@
                 </p>
             </a>
          
-            <a href="#" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80     h-20  flex text-center items-center  border border-green-700 text-white  rounded-lg bg-green-700 dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline ">
+            <a href="#" (click) ="cerrarSesion()" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80     h-20  flex text-center items-center  border border-green-700 text-white  rounded-lg bg-green-700 dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline ">
                 <svg class="w-auto h-15 fill-white 	mx-4"  xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M202.87-111.869q-37.783 0-64.392-26.609-26.609-26.609-26.609-64.392v-554.26q0-37.783 26.609-64.392 26.609-26.609 64.392-26.609h279.043v91.001H202.87v554.26h279.043v91.001H202.87Zm434.021-156.652L574-333.935 674.565-434.5H358.087v-91h316.478L574-626.065l62.891-65.414L848.131-480l-211.24 211.479Z"/></svg>
                 <p class = "mx-8">
                     Cerrar Sesion
@@ -62,4 +62,4 @@
 
 
   
-    
+

@@ -64,9 +64,11 @@
           "configurations": {
             "production": {
               "buildTarget": "PWA-EnterpriseEventsAnnouncer-APP:build:production"
+             
             },
             "development": {
-              "buildTarget": "PWA-EnterpriseEventsAnnouncer-APP:build:development"
+              "buildTarget": "PWA-EnterpriseEventsAnnouncer-APP:build:development",
+              "liveReload": false
             }
           },
           "defaultConfiguration": "development"

@@ -2,7 +2,7 @@
 
 
     <!-- Formulario -->
-    <form class="flex flex-col  items-center justify-center w-full" [formGroup]="formgroupStep1">
+    <form class="flex flex-col  items-center justify-center w-full" [formGroup]="formgroupStep1" (ngSubmit)="OnSubmit()">
 
         <h3 class="text-white text-2xl mb-8 font-semibold">Primer paso para el aviso</h3>
 

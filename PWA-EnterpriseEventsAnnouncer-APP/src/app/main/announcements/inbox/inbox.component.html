@@ -5,35 +5,34 @@
         <app-view-item    [receivedAnnouncement]="announcementToSend"></app-view-item>
 
     } @else {
-        <div class="flex w-full h-full flex-col border border-solid   z-20  items-center" >
-            <h2 class="mt-4  rounded-full text-lg font-semibold h-16 flex text-center items-center  text-white  dark:text-white  no-underline">
-                <svg class="flex fill-white mx-auto  h-16" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M725.769-457.308v-45.384h137.307v45.384H725.769Zm47.307 276.537-110.614-82.307L690-299.154l110.614 82.307-27.538 36.076ZM690.692-663l-27.538-36.076 108.384-81.692 27.538 36.076L690.692-663ZM217.308-220.771v-156.153h-62.692q-23.596 0-40.644-17.048t-17.048-40.644v-90.768q0-23.596 17.048-40.644t40.644-17.048h169.23l179.23-106.922v419.996l-179.23-106.922h-61.154v156.153h-45.384Zm240.384-129.46v-259.538L336-537.692H154.616q-4.615 0-8.462 3.846-3.846 3.847-3.846 8.462v90.768q0 4.615 3.846 8.462 3.847 3.846 8.462 3.846H336l121.692 72.077Zm100.769-5v-249.538q23.539 21.308 37.923 53.692 14.385 32.385 14.385 71.077t-14.385 71.077Q582-376.539 558.461-355.231ZM300-480Z"/></svg>
-                <p class="mx-auto xl:mx-auto">
-                    Bandeja de Avisos
-                </p>
-                
-            </h2>
-
-            <div class="flex w-full h-max  items-center justify-center">
-                <ul >
-                    <li class = "flex flex-col   justify-start items-center z-20">
-                        @if(announcementList$ | async ; as announcementList){
-                            @for (announcement of announcementList; track announcement.id) {
-                                <a  (click)="onAnnouncementClick(announcement)" class="flex  shadow-2xl text-center text-lg font-semibold  h-16 w-screen lg:w-72
-                                justify-center items-center  text-white
-                                    dark:text-white dark:hover-bg-gray-300 border hover:bg-green-300 bg-green-700 no-underline">
-                                    {{ announcement.title }}
-                                </a>
-                            } @empty {
-                              <a>No hay avisos para mostrar</a>
+            <div class="flex w-11/12 h-5/6 flex-col border border-solid   z-20  items-center" >
+                <h2 class="mt-4 border-l-4 w-screen justify-center   text-lg font-semibold h-16 flex text-center items-center  text-white  dark:text-white  no-underline">
+                    <svg class="flex fill-white mx-auto  h-16" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M725.769-457.308v-45.384h137.307v45.384H725.769Zm47.307 276.537-110.614-82.307L690-299.154l110.614 82.307-27.538 36.076ZM690.692-663l-27.538-36.076 108.384-81.692 27.538 36.076L690.692-663ZM217.308-220.771v-156.153h-62.692q-23.596 0-40.644-17.048t-17.048-40.644v-90.768q0-23.596 17.048-40.644t40.644-17.048h169.23l179.23-106.922v419.996l-179.23-106.922h-61.154v156.153h-45.384Zm240.384-129.46v-259.538L336-537.692H154.616q-4.615 0-8.462 3.846-3.846 3.847-3.846 8.462v90.768q0 4.615 3.846 8.462 3.847 3.846 8.462 3.846H336l121.692 72.077Zm100.769-5v-249.538q23.539 21.308 37.923 53.692 14.385 32.385 14.385 71.077t-14.385 71.077Q582-376.539 558.461-355.231ZM300-480Z"/></svg>
+                    <p class="flex nonte mx-auto xl:mx-auto">
+                        Bandeja de Avisos
+                    </p>
+                    
+                </h2>
+                <div class="flex-none w-full h-max  items-center justify-center">
+                    <ul >
+                        <li class = "flex flex-col   justify-start items-center z-20">
+                            @if(announcementList$ | async ; as announcementList){
+                                @for (announcement of announcementList; track announcement.id) {
+                                    <a  (click)="onAnnouncementClick(announcement)" class="flex  shadow-2xl text-center text-lg font-semibold  h-16 w-screen lg:w-72
+                                    justify-center items-center  text-white
+                                        dark:text-white dark:hover-bg-gray-300 border hover:bg-green-300 bg-green-700 no-underline">
+                                        {{ announcement.title }}
+                                    </a>
+                                } @empty {
+                                <a class="text-white dark:text-white">No hay avisos para mostrar</a>
+                                }
+                                
                             }
-                            
-                        }
-                            
-                    </li>
-                </ul>
-            </div>
-        </div>
+                                
+                        </li>
+                    </ul>
+                </div>
+          </div>
 
     }
        

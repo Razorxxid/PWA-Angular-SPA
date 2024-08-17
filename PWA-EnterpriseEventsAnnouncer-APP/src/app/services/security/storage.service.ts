@@ -31,7 +31,7 @@ export class StorageService {
   }
 
   public isLoggedIn(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    const user = localStorage.getItem('token');
     if (user) {
       return true;
     }

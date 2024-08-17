@@ -3,10 +3,13 @@
         <app-step1 (nextStep)="receiveFormFromStep1($event)"></app-step1>
       }   
       @if(isStep2()){
-        <app-step2 (nextStep)="completeStep2($event)"></app-step2>
+        <app-step2 (nextStep)="receiveFormFromStep2($event)" [receivedAnnouncementFromUser]="receiveForm"></app-step2>
       }
       @if(isStep3()){
-        <app-step3 ></app-step3>
+        <app-step3 (selectedOutput)="receiveFormFromStep3($event)" ></app-step3>
+      }
+      @if(isStep3() && completedConfirmation){
+        <h2 class="text-white text-2xl mb-8 font-semibold">Anuncio enviado con éxito</h2>
       }
 </div>
 

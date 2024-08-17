@@ -5,6 +5,8 @@ import { Step2Component } from './step2/step2.component';
 import { Step1Component } from './step1/step1.component';
 import { NgIf } from '@angular/common';
 import { SendAnnouncementDto } from 'src/app/viewmodels/sendAnnoucementDto';
+import { GroupsOfUserDto } from 'src/app/viewmodels/groupsOfUserDto';
+import { SignalRService } from 'src/app/services/security/signalr.service';
 
 enum creationStep {
   step1 = 1,
@@ -23,6 +25,7 @@ enum creationStep {
 export class NewAnnouncementComponent {  
 
 
+  service: SignalRService;
 
   receiveForm: SendAnnouncementDto = new SendAnnouncementDto('', '', '', []);
  
@@ -30,6 +33,7 @@ export class NewAnnouncementComponent {
 
   step: creationStep;
 
+   completedConfirmation: boolean = false;
 
   receiveFormFromStep1($event: SendAnnouncementDto) {
 
@@ -38,6 +42,19 @@ export class NewAnnouncementComponent {
     this.receiveForm.imageUrl = $event.imageUrl;
     this.receiveForm.destinationGroupsIds = $event.destinationGroupsIds;
     this.nextStep();
+  }
+  receiveFormFromStep2($event: boolean) 
+  {
+    this.step2Confirmation = $event;
+    this.nextStep();
+
+  }
+  receiveFormFromStep3($event: GroupsOfUserDto[]) {
+    for (let i = 0; i < $event.length; i++) {
+      this.receiveForm.destinationGroupsIds.push($event[i].id);
+    }
+    this.submitForm();
+    this.completedConfirmation = true;
   }
 
   isStep1() {
@@ -53,24 +70,16 @@ export class NewAnnouncementComponent {
   }
 
   nextStep() {
-    if (this.step === creationStep.step3) {
-      return;
-    }
     this.step++;
   }
 
   submitForm() {
-
+    this.service.sendMessageToGroups(this.receiveForm);
   }
 
-  completeStep2($event: boolean) 
-  {
-    this.step2Confirmation = $event;
-    this.nextStep();
-
-  }
-
-  constructor(private fb: FormBuilder) { 
+ 
+  constructor(private fb: FormBuilder, service: SignalRService) { 
     this.step = creationStep.step1;
+    this.service = service;
   }
 }
