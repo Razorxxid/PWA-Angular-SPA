@@ -29,7 +29,7 @@ export class SignalRService {
     }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://pwa-gremio-api.azure-api.net/pwa-gremio-api/GremioHubService", { 
+    .withUrl("https://pwa-gremio-api.service.signalr.net/GremioHubService", { 
       accessTokenFactory: () => token,
       
     })
