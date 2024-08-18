@@ -16,7 +16,7 @@ export const jWTInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
     if (token) {
       req = req.clone({
         setHeaders: {
-          Authorization: `bearer ${token}`, 'Access-Control-Allow-Origin': 'https://nice-bay-07b86bc0f.5.azurestaticapps.net',
+          Authorization: `bearer ${token}`, 
         
         },
       });
