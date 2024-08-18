@@ -1,10 +1,10 @@
 {
   "id": "/",
   "name": "El Gremio en tu Hogar, todo lo que necesitas del gremio en un solo lugar",
-  "short_name": "El Gremio en tu Hogar",
+  "short_name": "SURRBACC El gremio en tu hogar",
   "theme_color": "#16a34a",
   "background_color": "#fafafa",
-  "display": "minimal-ui",
+  "display": "standalone",
   "scope": "./",
   "start_url": "./?utm_source=pwa",
   "shortcuts": [
