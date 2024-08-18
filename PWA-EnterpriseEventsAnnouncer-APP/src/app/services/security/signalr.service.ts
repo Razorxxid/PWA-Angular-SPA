@@ -29,30 +29,52 @@ export class SignalRService {
     }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl("https://pwa-gremio-api.azure-api.net/pwa-gremio-api/GremioHubService", { 
-        accessTokenFactory: () => token
-      })
-      .configureLogging(signalR.LogLevel.Debug)
-      .build();
-
-    this.hubConnection
-      .start()
-      .then(() => {
-        console.log('Connection started');
-        this.reconnectAttempts = 0; // Reinicia el contador de reintentos al conectar con éxito
-        this.addReceiveMessageListener();
-      })
-      .catch(err => {
-        console.log('Error while starting connection: ' + err);
-        this.tryReconnect();
-      });
+    .withUrl("https://pwa-gremio-api.azure-api.net/pwa-gremio-api/GremioHubService", { 
+      accessTokenFactory: () => token
+    })
+    .configureLogging(signalR.LogLevel.Debug)
+    .withAutomaticReconnect({
+      nextRetryDelayInMilliseconds: retryContext => {
+        if (retryContext.elapsedMilliseconds < 30000) {
+          // 30 segundos máximo
+          return Math.min(1000 * Math.pow(2, retryContext.previousRetryCount), 10000); // Exponencial
+        } else {
+          return null; // No más reintentos
+        }
+      }
+    })
+    .build();
+  
+  this.hubConnection.serverTimeoutInMilliseconds = 30000; // Tiempo de espera del servidor
+  
+  this.hubConnection
+    .start()
+    .then(() => {
+      console.log('Connection started');
+      this.reconnectAttempts = 0; // Reinicia el contador de reintentos
+      this.addReceiveMessageListener();
+    })
+    .catch(err => {
+      console.log('Error while starting connection: ' + err);
+      this.tryReconnect();
+    });
+  
 
     this.hubConnection.onclose(() => {
       console.log('Connection closed');
       this.tryReconnect();
     });
-  }
 
+    this.hubConnection.onreconnecting((error) => {
+      console.log('Connection is reconnecting:', error);
+    });
+    
+    this.hubConnection.onreconnected((connectionId) => {
+      console.log('Connection reestablished. Connection ID:', connectionId);
+      this.reconnectAttempts = 0; // Reinicia el contador de reconexiones exitosas
+    });
+  }
+  
   private tryReconnect = () => {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
       this.reconnectAttempts++;
