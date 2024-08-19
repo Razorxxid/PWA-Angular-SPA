@@ -7,7 +7,7 @@ import { UserData } from '../viewmodels/userData';
 
 const UserData_API_Endpoint = 'https://pwa-gremio-api.azure-api.net/pwa-gremio-api/api/UserData/';
 
-const API_URL = 'https://pwa-gremio-api.azure-api.net/pwa-gremio-api//api/';
+const API_URL = 'https://pwa-gremio-api.azure-api.net/pwa-gremio-api/api/';
 const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json'

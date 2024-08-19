@@ -28,7 +28,7 @@ export class SignalRService {
       token = tokenCheck;
     }
     this.hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://pwa-demo-signalr.service.signalr.net/GremioHubService", { 
+    .withUrl("https://pwa-api-demo-dvb3hmd5frbqfkd0.brazilsouth-01.azurewebsites.net/GremioHubService", { 
       accessTokenFactory: () => token,
       withCredentials: false
     })
