@@ -14,6 +14,7 @@ import { RegisterStep2Component } from './app/auth/register/register-step2/regis
 import { RegisterStep3Component } from './app/auth/register/register-step3/register-step3.component';
 import { authenticatedGuard } from './app/services/security/authenticated-guard.service';
 import { PageNotFoundComponent } from './app/page-not-found/page-not-found.component';
+import { LayoutComponent } from './app/main/layout/layout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
@@ -79,5 +80,5 @@ export const routes: Routes = [
       { path: 'announcements', component: AnnouncementsComponent },
     ],
   },
-  { path: '**', redirectTo: 'main-menu', pathMatch: 'full' },
+ 
 ];
