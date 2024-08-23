@@ -1,19 +1,21 @@
-<div class="flex-col h-screen w-screen items-start justify-center   bg-green-600 ">
+<div class="flex-col flex  h-screen min-h-screen w-screen items-center  bg-green-600 ">
     @if(isMainMenuRoute())
     {             
-    
-            <router-outlet>
-                <app-layout class="flex ">
-                </app-layout>  
-        
+     
+            <router-outlet class="f">
+            
             </router-outlet>
     
      
       
          
     } @else  {
-   
-        <router-outlet></router-outlet>
+        <app-layout >
+        </app-layout>  
+
+        <router-outlet>
+
+        </router-outlet>
 
     }
 

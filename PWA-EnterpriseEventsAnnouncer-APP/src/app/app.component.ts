@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet,} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { LayoutComponent } from './main/layout/layout.component';
-
-
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  standalone: true,
-  imports: [RouterOutlet, LayoutComponent]
+  imports : [RouterOutlet, LayoutComponent, CommonModule],
+  standalone: true
 })
-export class AppComponent {
-  title = 'El Gremio en tu Hogar';
+export class AppComponent implements OnInit {
+  currentUrl: string = '';
+
+  event: Observable<RouterOutlet> | null = null;
 
   constructor(private router: Router) {
-  }
-
-
-  isMainMenuRoute(): boolean {
-    return this.router.url !== '/main-menu';
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentUrl = event.url;
+      });
   }
 
   ngOnInit() {
-    if(window.matchMedia('(display-mode: standalone)').matches) {
-      console.log('La app se está ejecutando en modo standalone');
-    } else {
-      console.log('La app se está ejecutando en un navegador');
-    }
-
+     this.currentUrl = this.router.url;
+  }
+  isMainMenuRoute(): boolean {
+    return this.currentUrl === '/main-menu';
   }
 }

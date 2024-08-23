@@ -68,7 +68,6 @@ export class AnnoucementHistoryComponent {
 
         this.selectedAnnouncements = [];
 
-       // window.location.reload();
       
   }
 
