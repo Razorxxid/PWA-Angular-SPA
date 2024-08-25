@@ -1,34 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { LayoutComponent } from './main/layout/layout.component';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports : [RouterOutlet, LayoutComponent, CommonModule],
-  standalone: true
+  imports: [RouterOutlet, LayoutComponent, CommonModule],
+  standalone: true,
+
 })
 export class AppComponent implements OnInit {
-  currentUrl: string = '';
+  currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  event: Observable<RouterOutlet> | null = null;
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentUrl = event.url;
-      });
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.currentUrl$.next(event.urlAfterRedirects);
+    });
   }
 
-  ngOnInit() {
-     this.currentUrl = this.router.url;
-  }
   isMainMenuRoute(): boolean {
-    return this.currentUrl === '/main-menu';
+    return this.currentUrl$.value === '/main-menu';
   }
+
+  isAuthRoute(): boolean {
+    return this.currentUrl$.value === '/auth/login' ;
+  }
+
 }

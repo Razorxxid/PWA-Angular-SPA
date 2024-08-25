@@ -1,22 +1,23 @@
-<div class="h-screen w-screen bg-green-600">
-    <div class="flex flex-col h-5/6 w-auto justify-center items-center space-y-6 z-20">
-        <a routerLink="/announcements/GestorAvisos/NuevoAviso"  class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
-            <svg class="object-contain fill-white mx-2 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q18 5 35 11.5t32 16.5q-13 16-22.5 33.5T567-694q-19-12-41-19t-46-7q-66 0-113 47t-47 113v280h320v-123q17 15 37 27.5t43 20.5v75h80v80H160Zm320-300Zm280 60v-120H640v-80h120v-120h80v120h120v80H840v120h-80Z"/></svg>           
-             <p class="mx-10">
+<div class="flex flex-col items-center h-screen w-screen justify-center space-y-6 z-20 bg-green-600">
+    <div>
+
+        <a routerLink="/announcements/GestorAvisos/NuevoAviso"  routerLink="active"  class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
+            <svg class="flex fill-white mx-2 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                <path d="M480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q18 5 35 11.5t32 16.5q-13 16-22.5 33.5T567-694q-19-12-41-19t-46-7q-66 0-113 47t-47 113v280h320v-123q17 15 37 27.5t43 20.5v75h80v80H160Zm320-300Zm280 60v-120H640v-80h120v-120h80v120h120v80H840v120h-80Z"/>
+            </svg>           
+            <p class="mx-8">
                 Nuevo Aviso
             </p>
-           
         </a>
-        <router-outlet name="view"></router-outlet>
-        <a routerLink="/announcements/GestorAvisos/Historial" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
-            <svg class="object-contain fill-white mx-2 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg>            
-            <p class="mx-24">
+    </div>
+    <div>
+        <a routerLink="/announcements/GestorAvisos/Historial" routerLink="active" class="shadow-xl text-lg font-semibold xl:w-80 sm:w-80 min-[280px]:w-80 h-16 flex text-center items-center border border-green-700 text-white rounded-lg dark:text-white dark:hover:bg-green-900 hover:bg-green-300 no-underline">
+            <svg class="flex fill-white mx-2 w-auto h-16" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40">
+                <path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/>
+            </svg>            
+            <p class="mx-4">
                 Historial de Avisos
             </p>
         </a>
     </div>
-
-  
 </div>
-
-
