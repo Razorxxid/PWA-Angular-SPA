@@ -11,6 +11,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptors([jWTInterceptorInterceptor])),
     provideRouter(routes),
-    provideServiceWorker('/ngsw-worker.js', { enabled: false }),
+    provideServiceWorker('/ngsw-worker.js', { enabled: true }),
   ]
 }).catch(err => console.error(err));
