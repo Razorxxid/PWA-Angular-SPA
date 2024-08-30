@@ -1,3 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+:host {
+    height: 100%;
+    flex: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  
+  }

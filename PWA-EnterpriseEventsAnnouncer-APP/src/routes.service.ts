@@ -20,11 +20,11 @@ export const routes: Routes = [
   { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
   { path: 'auth', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'register', redirectTo: 'register/step1', pathMatch: 'full' },
-  //{ path: '**', component: PageNotFoundComponent }, // Ruta para 404 Not Found
 
   {
     path: 'auth',
     component: AuthComponent,
+    canActivate: [authenticatedGuard],
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
@@ -51,6 +51,8 @@ export const routes: Routes = [
   {
     path: 'announcements/GestorAvisos',
     component: ManagementComponent,
+    canActivate: [authenticatedGuard],
+
     children: [
       { path: '', component: ManagementComponent, pathMatch: 'full' },
     ],
@@ -58,6 +60,8 @@ export const routes: Routes = [
   {
     path: 'announcements/Bandeja',
     component: InboxComponent,
+    canActivate: [authenticatedGuard],
+
     children: [
       { path: '', component: InboxComponent, pathMatch: 'full' },
     ],
@@ -80,5 +84,6 @@ export const routes: Routes = [
       { path: 'announcements', component: AnnouncementsComponent },
     ],
   },
- 
+  { path: '**', component: PageNotFoundComponent }, // Ruta para 404 Not Found
+
 ];

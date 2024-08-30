@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.css'],
   imports: [RouterOutlet, LayoutComponent, CommonModule],
   standalone: true,
-
 })
 export class AppComponent implements OnInit {
   currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
