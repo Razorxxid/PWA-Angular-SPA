@@ -13,9 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "dist/pwa-enterprise-events-announcer-app"
-            },
+            "outputPath": "dist/pwa-enterprise-events-announcer-app",
+
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
