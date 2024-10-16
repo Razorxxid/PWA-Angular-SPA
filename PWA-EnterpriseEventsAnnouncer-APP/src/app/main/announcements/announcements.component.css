@@ -3,9 +3,4 @@
 @tailwind components;
 @tailwind utilities;
 
-:host {
-  flex: auto;
 
-  align-content: center;
-
-}
