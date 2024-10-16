@@ -17,14 +17,12 @@ import { PageNotFoundComponent } from './app/page-not-found/page-not-found.compo
 import { LayoutComponent } from './app/main/layout/layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
   { path: 'auth', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'register', redirectTo: 'register/step1', pathMatch: 'full' },
 
   {
     path: 'auth',
     component: AuthComponent,
-    canActivate: [authenticatedGuard],
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
